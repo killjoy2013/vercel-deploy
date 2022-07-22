@@ -8,6 +8,7 @@ export default class MyApp extends app {
     pageProps = {
       ...pageProps,
       host: ctx.req.headers.host,
+      variant: ctx.req.headers.host.match(/justc1/) ? 1 : 2,
     };
     //}
 

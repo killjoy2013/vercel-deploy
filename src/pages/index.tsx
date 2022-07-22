@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { NextPage, NextPageContext } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../../styles/Home.module.css";
@@ -6,9 +6,10 @@ import ListWidget from "../widgets/ListWidget";
 
 type PageType = {
   host: string;
+  variant: number;
 };
 
-const Home: NextPage<PageType> = ({ host }) => {
+const Home: NextPage<PageType> = ({ host, variant }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -18,10 +19,14 @@ const Home: NextPage<PageType> = ({ host }) => {
       </Head>
 
       <main className={styles.main}>
-        <ListWidget variant={2} />
+        <ListWidget variant={variant} />
       </main>
     </div>
   );
 };
+
+export async function getServerSideProps({ req }: NextPageContext) {
+  return { props: {} };
+}
 
 export default Home;

@@ -1,16 +1,19 @@
-import React, { lazy } from "react";
+import React, { lazy, Suspense } from "react";
+import dynamic from "next/dynamic";
+
+import Variant1 from "./Variant1";
 
 interface ListWidgetProps {
   variant: number;
 }
 
 const index: React.FC<ListWidgetProps> = ({ variant }) => {
-  const Variant = lazy(() => import(`./Variant${variant}`));
+  const DynamicVariant = lazy(() => import(`./Variant${variant}`));
 
   return (
-    <div>
-      <Variant />
-    </div>
+    <Suspense fallback={`Loading...`}>
+      <DynamicVariant />
+    </Suspense>
   );
 };
 
