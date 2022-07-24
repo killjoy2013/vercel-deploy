@@ -28,11 +28,20 @@ export async function getServerSideProps(
   ctx: NextPageContext
 ): Promise<{ props: IPageProps }> {
   //will get from ctx?.req?.headers.host,
-  const domain = "justc1.info";
+
+  const regexExp = /\.(.+)/;
+
+  let host = ctx?.req?.headers?.host as string;
+  const match = host.match(regexExp);
+  const domain = match && match[1] ? (match[1] as string) : "unbranded";
+
+  console.log({ domain });
 
   const client = await clientPromise;
   const db = client.db("app_config");
   const brand = await db.collection<IAppConfig>("brands").findOne({ domain });
+
+  console.log({ brand });
 
   return {
     props: {

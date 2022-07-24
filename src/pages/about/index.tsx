@@ -1,6 +1,6 @@
 import { NextPage, NextPageContext } from "next";
 import React from "react";
-import { IPageProps } from "../interfaces/IPageProps";
+import { IPageProps } from "../../interfaces/IPageProps";
 
 const About: NextPage<IPageProps> = ({ host, variant }) => {
   return (
