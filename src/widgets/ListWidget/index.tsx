@@ -8,7 +8,7 @@ const index: React.FC<IListWidget> = ({ variant }) => {
   );
 
   return (
-    <Suspense fallback={`Loading...`}>
+    <Suspense fallback={`Loading111...`}>
       <DynamicVariant variant={variant} />
     </Suspense>
   );
