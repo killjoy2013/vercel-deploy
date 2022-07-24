@@ -9,7 +9,7 @@ import IAppConfig from "../interfaces/IAppConfig";
 import { useContext } from "react";
 import { BrandContext } from "../contexts/BrandContext";
 
-const Home: NextPage<IPageProps> = () => {
+const HomePage: NextPage<IPageProps> = () => {
   const { domain } = useContext(BrandContext);
 
   return (
@@ -34,22 +34,24 @@ export async function getServerSideProps(
   const regexExp = /\.(.+)/;
 
   let host = ctx?.req?.headers?.host as string;
-
   const match = host.match(regexExp);
-  const domain = match && match[1] ? (match[1] as string) : "unbranded";
+
+  const domain = match && match[1] ? (match[1] as string) : undefined;
 
   const client = await clientPromise;
   const db = client.db("app_config");
-  const brand = await db.collection<IAppConfig>("brands").findOne({ domain });
+
+  const filter = domain ? { domain } : { title: "unbranded" };
+  const brand = await db.collection<IAppConfig>("brands").findOne(filter);
 
   return {
     props: {
       variant: brand?.variant as number,
       host: ctx?.req?.headers.host as string,
-      domain,
+      domain: brand?.domain,
       title: brand?.title as string,
     },
   };
 }
 
-export default Home;
+export default HomePage;

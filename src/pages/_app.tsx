@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { BrandContextProvider } from "../contexts/BrandContext";
 import IAppConfig from "../interfaces/IAppConfig";
+import Layout from "../components/Layout";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,7 +27,9 @@ function MyApp({ Component, pageProps }: AppProps<IAppConfig>) {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <BrandContextProvider domain={domain} title={title} variant={variant}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </BrandContextProvider>
     </QueryClientProvider>
   );

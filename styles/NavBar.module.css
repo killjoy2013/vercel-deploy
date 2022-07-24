@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: end;
+  width: 100%;
+  background-color: darkgreen;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+.container {
+  width: 100%;
+  background-color: darkgreen;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+.logo {
+  display: inline-block;
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+}
+
+.navItem a {
+  display: inline-block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.navItem:hover {
+  background-color: white;
+}
+
+.navItem:hover a {
+  color: darkgreen;
+}
+
+.logo img {
+  width: 175px;
+  vertical-align: middle;
+}
