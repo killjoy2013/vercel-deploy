@@ -1,17 +1,18 @@
-import React, { ComponentType, lazy, Suspense } from "react";
-import { IWidgetProps } from "../../interfaces/IWidgetProps";
-import IListWidget from "./interfaces/IListWidget";
+import React, { ComponentType, lazy, Suspense, useContext } from "react";
+import { BrandContext } from "../../contexts/BrandContext";
 
-const index: React.FC<IListWidget> = ({ variant }) => {
-  const DynamicVariant = lazy<ComponentType<IWidgetProps>>(
+const ListWidget: React.FC = () => {
+  const { variant } = useContext(BrandContext);
+
+  const DynamicVariant = lazy<ComponentType>(
     () => import(`./Variant${variant}`)
   );
 
   return (
     <Suspense fallback={`Loading111...`}>
-      <DynamicVariant variant={variant} />
+      <DynamicVariant />
     </Suspense>
   );
 };
 
-export default index;
+export default ListWidget;

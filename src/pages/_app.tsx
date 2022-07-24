@@ -1,7 +1,10 @@
 import "../../styles/globals.css";
-import type { AppProps } from "next/app";
+import type { AppProps as NextAppProps } from "next/app";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+import { BrandContextProvider } from "../contexts/BrandContext";
+import IAppConfig from "../interfaces/IAppConfig";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -11,11 +14,20 @@ const queryClient = new QueryClient({
   },
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+// modified version - allows for custom pageProps type, falling back to 'any'
+type AppProps<P = any> = {
+  pageProps: P;
+} & Omit<NextAppProps<P>, "pageProps">;
+
+function MyApp({ Component, pageProps }: AppProps<IAppConfig>) {
+  const { domain, title, variant } = pageProps;
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <Component {...pageProps} />
+      <BrandContextProvider domain={domain} title={title} variant={variant}>
+        <Component {...pageProps} />
+      </BrandContextProvider>
     </QueryClientProvider>
   );
 }

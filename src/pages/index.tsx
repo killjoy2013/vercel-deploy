@@ -6,8 +6,12 @@ import { IPageProps } from "../interfaces/IPageProps";
 import ListWidget from "../widgets/ListWidget";
 import clientPromise from "../../lib/mongodb";
 import IAppConfig from "../interfaces/IAppConfig";
+import { useContext } from "react";
+import { BrandContext } from "../contexts/BrandContext";
 
-const Home: NextPage<IPageProps> = ({ host, variant }) => {
+const Home: NextPage<IPageProps> = () => {
+  const { domain } = useContext(BrandContext);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,8 +21,8 @@ const Home: NextPage<IPageProps> = ({ host, variant }) => {
       </Head>
 
       <main className={styles.main}>
-        <div>{host}</div>
-        <ListWidget variant={variant as number} />
+        <div>{domain}</div>
+        <ListWidget />
       </main>
     </div>
   );
@@ -27,21 +31,16 @@ const Home: NextPage<IPageProps> = ({ host, variant }) => {
 export async function getServerSideProps(
   ctx: NextPageContext
 ): Promise<{ props: IPageProps }> {
-  //will get from ctx?.req?.headers.host,
-
   const regexExp = /\.(.+)/;
 
   let host = ctx?.req?.headers?.host as string;
+
   const match = host.match(regexExp);
   const domain = match && match[1] ? (match[1] as string) : "unbranded";
-
-  console.log({ domain });
 
   const client = await clientPromise;
   const db = client.db("app_config");
   const brand = await db.collection<IAppConfig>("brands").findOne({ domain });
-
-  console.log({ brand });
 
   return {
     props: {

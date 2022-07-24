@@ -1,11 +1,14 @@
 import { useContext } from "react";
+import { BrandContext } from "../../../contexts/BrandContext";
 import { ControllerContext } from "./Controller";
 
 const View = () => {
   const { data } = useContext(ControllerContext);
+  const { title } = useContext(BrandContext);
 
   return (
     <div>
+      <div>{title}</div>
       <table>
         <tbody>
           {data &&

@@ -3,9 +3,9 @@ import { IPageProps } from "../../../interfaces/IPageProps";
 import { ControllerProvider } from "./Controller";
 import View from "./View";
 
-const Default: React.FC<IPageProps> = ({ host, variant }) => {
+const Default: React.FC<IPageProps> = () => {
   return (
-    <ControllerProvider variant={variant as number}>
+    <ControllerProvider>
       <View />
     </ControllerProvider>
   );
