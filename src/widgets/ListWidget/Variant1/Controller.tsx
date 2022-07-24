@@ -1,47 +1,37 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import IPerson from "../../../interfaces/IPerson";
+import IContextProvider from "../interfaces/IContextProvider";
+import IControllerContext from "../interfaces/IControllerContext";
+import IResponseType from "../interfaces/IResponseType";
 
-interface ContextProviderProps {
-  children?: any;
-}
+const fetchAxios = async () => {
+  let resp = axios.get<IResponseType>(
+    "https://swapi.dev/api/people/?format=json",
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  );
 
-interface ControllerContextProps {
-  title: string;
-  handleQuery: () => void;
-  data: [IPerson?];
-}
+  return (await resp).data.results;
+};
 
-interface ResponseType {
-  results: [IPerson?];
-}
-
-const ControllerContext = React.createContext<ControllerContextProps>({
-  title: "",
-  handleQuery: () => {},
+const ControllerContext = React.createContext<IControllerContext>({
   data: [],
 });
 
-const ControllerProvider: FC<ContextProviderProps> = ({ children }) => {
-  const [data, setData] = useState<[IPerson?]>([]);
-
-  const handleQuery = async () => {
-    const { data, status } = await axios.get<ResponseType>(
-      "https://randomuser.me/api/?gender=male&results=50",
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-    setData(data.results);
-  };
+const ControllerProvider: FC<IContextProvider> = ({ children, variant }) => {
+  const { isLoading, isError, data, error } = useQuery<[IPerson]>(
+    ["initial-data"],
+    fetchAxios
+  );
 
   return (
     <ControllerContext.Provider
       value={{
-        title: "Variant 1",
-        handleQuery,
         data,
       }}
     >

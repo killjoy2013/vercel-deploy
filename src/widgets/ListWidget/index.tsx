@@ -1,18 +1,15 @@
-import React, { lazy, Suspense } from "react";
-import dynamic from "next/dynamic";
+import React, { ComponentType, lazy, Suspense } from "react";
+import { IWidgetProps } from "../../interfaces/IWidgetProps";
+import IListWidget from "./interfaces/IListWidget";
 
-import Variant1 from "./Variant1";
-
-interface ListWidgetProps {
-  variant: number;
-}
-
-const index: React.FC<ListWidgetProps> = ({ variant }) => {
-  const DynamicVariant = lazy(() => import(`./Variant${variant}`));
+const index: React.FC<IListWidget> = ({ variant }) => {
+  const DynamicVariant = lazy<ComponentType<IWidgetProps>>(
+    () => import(`./Variant${variant}`)
+  );
 
   return (
     <Suspense fallback={`Loading...`}>
-      <DynamicVariant />
+      <DynamicVariant variant={variant} />
     </Suspense>
   );
 };

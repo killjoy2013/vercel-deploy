@@ -1,9 +1,5 @@
 export default interface IPerson {
-  name: {
-    title: string;
-    first: string;
-    last: string;
-  };
+  name: string;
   gender: string;
-  email: string;
+  mass: string;
 }

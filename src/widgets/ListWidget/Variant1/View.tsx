@@ -2,19 +2,18 @@ import { useContext } from "react";
 import { ControllerContext } from "./Controller";
 
 const View = () => {
-  const { title, handleQuery, data } = useContext(ControllerContext);
+  const { data } = useContext(ControllerContext);
 
   return (
     <div>
-      <div>{title}</div>
-      <button onClick={handleQuery}>bass</button>
       <table>
         <tbody>
-          {data.map((person) => (
-            <tr key={person?.email}>
-              <td>{person?.email}</td>
-            </tr>
-          ))}
+          {data &&
+            data.map((person) => (
+              <tr key={person?.name}>
+                <td>{person?.name}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

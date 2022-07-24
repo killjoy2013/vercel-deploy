@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import React from "react";
+import { IWidgetProps } from "../../../interfaces/IWidgetProps";
 import { ControllerProvider } from "./Controller";
 import View from "./View";
 
-const Default = () => {
+const Default: React.FC<IWidgetProps> = ({ variant }) => {
   return (
-    <ControllerProvider>
+    <ControllerProvider variant={variant}>
       <View />
     </ControllerProvider>
   );

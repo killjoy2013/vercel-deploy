@@ -2,14 +2,12 @@ import type { NextPage, NextPageContext } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../../styles/Home.module.css";
+import { IPageProps } from "../interfaces/IPageProps";
 import ListWidget from "../widgets/ListWidget";
+import clientPromise from "../../lib/mongodb";
+import IAppConfig from "../interfaces/IAppConfig";
 
-type PageType = {
-  host: string;
-  variant: number;
-};
-
-const Home: NextPage<PageType> = ({ host, variant }) => {
+const Home: NextPage<IPageProps> = ({ host, variant }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -19,14 +17,31 @@ const Home: NextPage<PageType> = ({ host, variant }) => {
       </Head>
 
       <main className={styles.main}>
-        <ListWidget variant={variant} />
+        <div>{host}</div>
+        <ListWidget variant={variant as number} />
       </main>
     </div>
   );
 };
 
-export async function getServerSideProps({ req }: NextPageContext) {
-  return { props: {} };
+export async function getServerSideProps(
+  ctx: NextPageContext
+): Promise<{ props: IPageProps }> {
+  //will get from ctx?.req?.headers.host,
+  const domain = "justc1.info";
+
+  const client = await clientPromise;
+  const db = client.db("app_config");
+  const brand = await db.collection<IAppConfig>("brands").findOne({ domain });
+
+  return {
+    props: {
+      variant: brand?.variant as number,
+      host: ctx?.req?.headers.host as string,
+      domain,
+      title: brand?.title as string,
+    },
+  };
 }
 
 export default Home;
