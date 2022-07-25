@@ -21,12 +21,17 @@ type AppProps<P = any> = {
 } & Omit<NextAppProps<P>, "pageProps">;
 
 function MyApp({ Component, pageProps }: AppProps<IAppConfig>) {
-  const { domain, title, variant } = pageProps;
+  const { domain, title, variant, imageUrl } = pageProps;
 
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <BrandContextProvider domain={domain} title={title} variant={variant}>
+      <BrandContextProvider
+        domain={domain}
+        title={title}
+        variant={variant}
+        imageUrl={imageUrl}
+      >
         <Layout>
           <Component {...pageProps} />
         </Layout>

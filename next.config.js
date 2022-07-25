@@ -5,6 +5,9 @@ const nextConfig = {
   httpAgentOptions: {
     keepAlive: false,
   },
+  images: {
+    domains: ["dev-to-uploads.s3.amazonaws.com"],
+  },
 };
 
 module.exports = nextConfig;

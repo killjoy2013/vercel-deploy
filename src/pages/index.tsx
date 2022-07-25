@@ -9,8 +9,8 @@ import IAppConfig from "../interfaces/IAppConfig";
 import { useContext } from "react";
 import { BrandContext } from "../contexts/BrandContext";
 
-const HomePage: NextPage<IPageProps> = () => {
-  const { domain } = useContext(BrandContext);
+const HomePage: NextPage<IPageProps> = ({ imageUrl }) => {
+  const { title } = useContext(BrandContext);
 
   return (
     <div className={styles.container}>
@@ -21,8 +21,9 @@ const HomePage: NextPage<IPageProps> = () => {
       </Head>
 
       <main className={styles.main}>
-        <div>{domain}</div>
+        <h3>{title}</h3>
         <ListWidget />
+        <Image src={imageUrl} width={300} height={300} />
       </main>
     </div>
   );
@@ -47,9 +48,9 @@ export async function getServerSideProps(
   return {
     props: {
       variant: brand?.variant as number,
-      host: ctx?.req?.headers.host as string,
       domain: brand?.domain,
       title: brand?.title as string,
+      imageUrl: brand?.imageUrl as string,
     },
   };
 }

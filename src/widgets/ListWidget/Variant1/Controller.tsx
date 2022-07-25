@@ -27,7 +27,7 @@ const ControllerContext = React.createContext<IControllerContext>({
 });
 
 const ControllerProvider: FC<IContextProvider> = ({ children }) => {
-  const { domain, title, variant } = useContext(BrandContext);
+  const { title } = useContext(BrandContext);
   const { isLoading, isError, data, error } = useQuery<[IPerson]>(
     ["initial-data"],
     fetchAxios

@@ -4,7 +4,7 @@ export interface IControllerContext {
   data?: [IPerson?];
 }
 
-export interface IContextProvider extends IControllerContext {
+export interface IContextProvider {
   children: any;
 }
 

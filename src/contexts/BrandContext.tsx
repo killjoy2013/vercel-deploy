@@ -11,6 +11,7 @@ export const BrandContext = React.createContext<IBrandContext>({
   domain: "",
   title: "",
   variant: 0,
+  imageUrl: "",
 });
 
 export const BrandContextProvider: FC<IBrandContextProvider> = ({
@@ -18,9 +19,10 @@ export const BrandContextProvider: FC<IBrandContextProvider> = ({
   title,
   variant,
   children,
+  imageUrl,
 }) => {
   return (
-    <BrandContext.Provider value={{ domain, title, variant }}>
+    <BrandContext.Provider value={{ domain, title, variant, imageUrl }}>
       {children}
     </BrandContext.Provider>
   );
