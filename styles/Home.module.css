@@ -3,17 +3,37 @@
   display: flex;
   flex-direction: column;
   justify-items: flex-start;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .main {
   min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
+  gap: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  /* background-color: yellow; */
+}
+
+.title {
+  display: flex;
+  font-size: 4rem;
+  font-weight: bold;
+
+  justify-content: flex-start;
+  justify-items: flex-start;
+  /* background-color: pink; */
+  width: 100%;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  /* background-color: lightgreen; */
+  width: 100%;
 }
 
 .footer {

@@ -21,9 +21,11 @@ const HomePage: NextPage<IPageProps> = ({ imageUrl }) => {
       </Head>
 
       <main className={styles.main}>
-        <h3>{title}</h3>
-        <ListWidget />
-        <Image src={imageUrl} width={300} height={300} />
+        <div className={styles.title}>{title}</div>
+        <div className={styles.content}>
+          <ListWidget />
+          <Image src={imageUrl} width={300} height={300} />
+        </div>
       </main>
     </div>
   );
