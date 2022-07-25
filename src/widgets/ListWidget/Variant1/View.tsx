@@ -1,13 +1,19 @@
 import { useContext } from "react";
-import { BrandContext } from "../../../contexts/BrandContext";
 import { ControllerContext } from "./Controller";
+import styles from "../../../../styles/ListWidgetV1.module.css";
 
 const View = () => {
   const { data } = useContext(ControllerContext);
 
   return (
     <div>
-      <table>
+      {data &&
+        data.map((person) => (
+          <div className={styles.item} key={person?.name}>
+            {person?.name}
+          </div>
+        ))}
+      {/* <table>
         <tbody>
           {data &&
             data.map((person) => (
@@ -16,7 +22,7 @@ const View = () => {
               </tr>
             ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };

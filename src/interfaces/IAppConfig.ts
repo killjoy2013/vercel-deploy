@@ -3,4 +3,5 @@ export default interface IAppConfig {
   domain: string;
   variant: number;
   imageUrl: string;
+  apiUrl: string;
 }

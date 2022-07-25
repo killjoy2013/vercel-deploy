@@ -3,4 +3,5 @@ export interface IPageProps {
   variant?: number;
   title?: string;
   imageUrl: string;
+  apiUrl: string;
 }

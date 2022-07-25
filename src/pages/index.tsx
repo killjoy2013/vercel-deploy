@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { BrandContext } from "../contexts/BrandContext";
 
 const HomePage: NextPage<IPageProps> = ({ imageUrl }) => {
-  const { title } = useContext(BrandContext);
+  const { title, apiUrl } = useContext(BrandContext);
 
   return (
     <div className={styles.container}>
@@ -24,7 +24,13 @@ const HomePage: NextPage<IPageProps> = ({ imageUrl }) => {
         <div className={styles.title}>{title}</div>
         <div className={styles.content}>
           <ListWidget />
-          <Image src={imageUrl} width={300} height={300} />
+          <Image
+            className={styles.image}
+            layout="fixed"
+            src={imageUrl}
+            width={300}
+            height={300}
+          />
         </div>
       </main>
     </div>
@@ -53,6 +59,7 @@ export async function getServerSideProps(
       domain: brand?.domain,
       title: brand?.title as string,
       imageUrl: brand?.imageUrl as string,
+      apiUrl: brand?.apiUrl as string,
     },
   };
 }

@@ -9,15 +9,12 @@ import {
   IResponseType,
 } from "../interfaces";
 
-const fetchAxios = async () => {
-  let resp = axios.get<IResponseType>(
-    "https://swapi.dev/api/people/?format=json",
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  );
+const fetchAxios = async (apiUrl: string) => {
+  let resp = axios.get<IResponseType>(apiUrl, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
 
   return (await resp).data.results;
 };
@@ -27,10 +24,10 @@ const ControllerContext = React.createContext<IControllerContext>({
 });
 
 const ControllerProvider: FC<IContextProvider> = ({ children }) => {
-  const { title } = useContext(BrandContext);
+  const { apiUrl } = useContext(BrandContext);
   const { isLoading, isError, data, error } = useQuery<[IPerson]>(
     ["initial-data"],
-    fetchAxios
+    fetchAxios.bind(null, apiUrl)
   );
 
   return (

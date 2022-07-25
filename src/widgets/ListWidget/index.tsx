@@ -2,7 +2,7 @@ import React, { ComponentType, lazy, Suspense, useContext } from "react";
 import { BrandContext } from "../../contexts/BrandContext";
 
 const ListWidget: React.FC = () => {
-  const { variant } = useContext(BrandContext);
+  const { variant, apiUrl } = useContext(BrandContext);
 
   const DynamicVariant = lazy<ComponentType>(
     () => import(`./Variant${variant}`)

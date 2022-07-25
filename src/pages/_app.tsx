@@ -21,7 +21,7 @@ type AppProps<P = any> = {
 } & Omit<NextAppProps<P>, "pageProps">;
 
 function MyApp({ Component, pageProps }: AppProps<IAppConfig>) {
-  const { domain, title, variant, imageUrl } = pageProps;
+  const { domain, title, variant, imageUrl, apiUrl } = pageProps;
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps<IAppConfig>) {
         title={title}
         variant={variant}
         imageUrl={imageUrl}
+        apiUrl={apiUrl}
       >
         <Layout>
           <Component {...pageProps} />

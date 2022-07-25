@@ -5,9 +5,15 @@ import { IPageProps } from "../../interfaces/IPageProps";
 const AboutPage: NextPage<IPageProps> = () => {
   return (
     <>
-      <div>About</div>
+      <h2>Brand story... Can be generated in a static way on build time....</h2>
     </>
   );
 };
+
+export async function getStaticProps(context: NextPageContext) {
+  return {
+    props: {},
+  };
+}
 
 export default AboutPage;

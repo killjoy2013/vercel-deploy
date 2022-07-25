@@ -1,7 +1,7 @@
 import React from "react";
 
 const NotAllowedPage = () => {
-  return <div>Sorry bro! You are not allowed here...</div>;
+  return <h1>Sorry bro! You are not allowed here...</h1>;
 };
 
 export default NotAllowedPage;
