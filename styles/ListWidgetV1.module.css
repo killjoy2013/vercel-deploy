@@ -2,10 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 1.5rem;
+  height: 1.3rem;
   width: 10rem;
   background-color: blueviolet;
   color: white;
   margin-bottom: 0.5rem;
   border-radius: 1rem;
+  font-size: 0.6rem;
 }
