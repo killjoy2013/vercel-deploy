@@ -50,7 +50,7 @@ export async function getServerSideProps(
   const client = await clientPromise;
   const db = client.db("app_config");
 
-  const filter = domain ? { domain } : { title: "unbranded" };
+  const filter = domain ? { domain } : { title: "local" };
   const brand = await db.collection<IAppConfig>("brands").findOne(filter);
 
   return {
