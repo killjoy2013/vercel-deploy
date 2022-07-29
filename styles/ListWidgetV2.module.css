@@ -2,11 +2,12 @@
   width: 800px;
   /* margin-top: 5rem; */
   border-collapse: collapse;
+  font-size: small;
 }
 
 .td {
   text-align: left;
-  padding: 1rem 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .td:first-child {
@@ -25,7 +26,7 @@
 .th {
   background-color: #eeeeee;
   text-align: left;
-  padding: 0.5rem 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .th:first-child {
